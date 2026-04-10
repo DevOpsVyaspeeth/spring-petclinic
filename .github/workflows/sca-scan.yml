@@ -47,7 +47,7 @@ jobs:
         # License checking: Use either allow-licenses OR deny-licenses, not both
         # allow-licenses: MIT, Apache-2.0, BSD-3-Clause, BSD-2-Clause, ISC
         deny-licenses: GPL-3.0, AGPL-3.0
-        comment-summary-in-pr: always
+        # comment-summary-in-pr: always  # Disabled - using custom comment below
         retry-on-snapshot-warnings: true  # Retry if snapshots not found
         warn-only: true  # Don't fail on warnings, only on actual vulnerabilities
         

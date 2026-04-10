@@ -24,19 +24,19 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Build Project (optional for SCA)
-      continue-on-error: true
-      run: |
-        # For Maven projects
-        if [ -f "pom.xml" ]; then
-          # mvn clean install -DskipTests
-          ./mvnw -B verify
-        # For Gradle projects
-        elif [ -f "gradlew" ]; then
-          ./gradlew clean build -x test
-        elif [ -f "build.gradle" ] || [ -f "build.gradle.kts" ]; then
-          gradle clean build -x test
-        fi
+    # - name: Build Project (optional for SCA)
+    #   continue-on-error: true
+    #   run: |
+    #     # For Maven projects
+    #     if [ -f "pom.xml" ]; then
+    #       # mvn clean install -DskipTests
+    #       ./mvnw -B verify
+    #     # For Gradle projects
+    #     elif [ -f "gradlew" ]; then
+    #       ./gradlew clean build -x test
+    #     elif [ -f "build.gradle" ] || [ -f "build.gradle.kts" ]; then
+    #       gradle clean build -x test
+    #     fi
 
     - name: Dependency Review
       uses: actions/dependency-review-action@v4

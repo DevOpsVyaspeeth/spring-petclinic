@@ -1,8 +1,8 @@
 name: "SAST - CodeQL Analysis"
 
 on:
-  # push:
-  #   branches: [ "main", "master", "develop" ]
+  push:
+    branches: [ "main", "master", "develop" ]
   pull_request:
     branches: [ "main", "master", "develop" ]
   # schedule:
@@ -24,7 +24,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript', 'python', 'java', 'csharp', 'go' ]
+        # Only scan Java - comment out other languages if not needed
+        language: [ 'java' ]
+        # language: [ 'javascript', 'python', 'java', 'csharp', 'go' ]
         # CodeQL supports: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby', 'swift'
         # Learn more: https://aka.ms/codeql-docs/language-support
 
@@ -88,7 +90,9 @@ jobs:
       uses: actions/github-script@v7
       with:
         script: |
-          const languages = ['javascript', 'python', 'java', 'csharp', 'go'];
+          // Only scanning Java
+          const languages = ['java'];
+          // const languages = ['javascript', 'python', 'java', 'csharp', 'go'];
           
           let comment = '## 🔒 SAST (Static Application Security Testing) Results\n\n';
           comment += '### CodeQL Analysis Summary\n\n';

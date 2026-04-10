@@ -70,23 +70,12 @@ jobs:
       with:
         category: "/language:${{ matrix.language }}"
         upload: true
+        # Fail the workflow if critical or high severity issues are found
+        # Options: 'error' (critical/high), 'warning' (medium), 'note' (low)
+        fail-on: error  # Fails on critical/high severity issues
 
-    - name: Get CodeQL Results
-      if: always() && github.event_name == 'pull_request'
-      id: get-sarif
-      run: |
-        # Download SARIF results for comment generation
-        echo "Analysis complete for ${{ matrix.language }}"
-        echo "results_available=true" >> $GITHUB_OUTPUT
-
-  post-pr-comment:
-    name: Post SAST Results to PR
-    runs-on: ubuntu-latest
-    needs: analyze
-    if: always() && github.event_name == 'pull_request'
-    
-    steps:
     - name: Post PR Comment with SAST Results
+      if: always() && github.event_name == 'pull_request'
       uses: actions/github-script@v7
       with:
         script: |
